@@ -27,3 +27,8 @@ Este é um projeto simples desenvolvido com **React** para gerenciamento de tare
   npm start
 
 5. O projeto estará disponível em http://localhost:3000.
+
+![Captura de tela 2025-03-23 154900](https://github.com/user-attachments/assets/7121623b-734e-482f-a66b-e0434cf027bc)
+![Captura de tela 2025-03-23 153649](https://github.com/user-attachments/assets/81355a1f-b73b-4a11-b83c-a9cd999c204b)
+![Captura de tela 2025-03-23 153609](https://github.com/user-attachments/assets/c4080080-dada-49af-ab03-974c3affabf7)
+![Captura de tela 2025-03-23 153547](https://github.com/user-attachments/assets/69d904ac-c53f-4bdf-a118-8634a007d291)
