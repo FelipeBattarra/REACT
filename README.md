@@ -15,10 +15,10 @@ Este é um projeto simples desenvolvido com **React** para gerenciamento de tare
 
 ## Como Rodar o Projeto:
 1. Clone o repositório:
-   git clone https://github.com/seu-usuario/nome-do-repositorio.git
+   git clone [https://github.com/seu-usuario/nome-do-repositorio](https://github.com/FelipeBattarra/REACT).git
 
 2. Navegue até a pasta do projeto:
-   cd nome-do-repositorio
+   cd REACT
 
 3. Instale as dependências:
    npm install
