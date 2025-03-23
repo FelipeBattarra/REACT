@@ -1,44 +1,125 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Cadastro = () => {
-  // Definindo o estado para armazenar os dados após o cadastro
-  const [dados, setDados] = useState({ nome: '', email: '', idade: '' });
+  const [input, setInput] = useState('');
+  const [tarefas, setTarefas] = useState(
+    JSON.parse(localStorage.getItem('tarefas')) || []
+  );
+  const [nomeUsuario, setNomeUsuario] = useState(localStorage.getItem('nomeUsuario') || '');
+  const [cor, setCor] = useState(localStorage.getItem('corFundo') || 'white');
 
+  // Pergunta o nome do usuário apenas se não estiver salvo no localStorage
+  useEffect(() => {
+    if (!nomeUsuario) {
+      const nome = prompt('Qual é o seu nome?');
+      if (nome) {
+        setNomeUsuario(nome);
+        localStorage.setItem('nomeUsuario', nome);
+      }
+    }
+    if (cor  === 'white'){
+      document.body.style.color = 'black';
+    }
+    if (cor  === 'cyan'){
+      document.body.style.color = 'black';
+    }
+    if (cor === 'black') {
+      document.body.style.color = 'white';
+    }
+// Altera o fundo da página
+    document.body.style.backgroundColor = cor; // Altera o fundo da página
+  }, [nomeUsuario, cor]);
+
+  // Função para registrar a tarefa
   const handleRegistro = (e) => {
     e.preventDefault();
-    setDados({
-        nome: e.target.nome.value,  // 'nome' é o 'name' do campo de entrada
-        email: e.target.email.value,
-        idade: e.target.idade.value,
-    });
-  }
+    if (input.trim() === '') return; // Evita adicionar tarefa vazia
+    const novasTarefas = [...tarefas, input];
+    setTarefas(novasTarefas);
+    localStorage.setItem('tarefas', JSON.stringify(novasTarefas));
+    setInput('');
+  };
+
+  // Função para excluir tarefa
+  const handleExcluir = (tarefa) => {
+    const tarefasRestantes = tarefas.filter((t) => t !== tarefa);
+    setTarefas(tarefasRestantes);
+    localStorage.setItem('tarefas', JSON.stringify(tarefasRestantes));
+  };
+
+  // Função para alterar a cor de fundo
+  const handleCorChange = (e) => {
+    const novaCor = e.target.value;
+    setCor(novaCor);
+    localStorage.setItem('corFundo', novaCor); 
+  };
 
   return (
     <div>
-      <h2>Cadastro</h2>
+      <h2>{nomeUsuario}, sua lista de tarefas</h2>
       <form onSubmit={handleRegistro}>
-        <div>
-          <label>Nome: </label>
-          <input type="text" name="nome" placeholder="Digite seu nome" />
-        </div>
-        <div>
-          <label>E-mail: </label>
-          <input type="email" name="email" placeholder="Digite seu e-mail" />
-        </div>
-        <div>
-          <label>Idade: </label>
-          <input type="number" name="idade" placeholder="Digite sua idade" />
-        </div>
+        <label>Nome da tarefa:</label><br />
+        <input
+          type="text"
+          name="tarefa"
+          placeholder="Digite o nome da tarefa"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+        /><br />
         <button type="submit">Registrar</button>
       </form>
-
-        <div>
-          <h3>Informações cadastradas:</h3>
-          <p>Nome: {dados.nome}</p>
-          <p>E-mail: {dados.email}</p>
-          <p>Idade: {dados.idade}</p>
-        </div>
+      <br /><br />
       
+      {/* Lista de tarefas e botão de exclusão */}
+      <ul>
+        {tarefas.map((tarefa, index) => (
+          <li key={index}>
+            {tarefa} <button onClick={() => handleExcluir(tarefa)}>Excluir</button>
+          </li>
+        ))}
+      </ul>
+
+      {/* Seção para escolher a cor de fundo */}
+      <div>
+        <h3>Escolha uma cor para o fundo da página:</h3>
+        <label>
+          <input
+            type="radio"
+            value="black"
+            checked={cor === 'Black'}
+            onChange={handleCorChange}
+            style={{ color: 'white' }}
+          />
+          Preto
+        </label>
+        <label>
+          <input
+            type="radio"
+            value="cyan"
+            checked={cor === 'cyan'}
+            onChange={handleCorChange}
+          />
+          Ciano
+        </label>
+        <label>
+          <input
+            type="radio"
+            value="darkslategrey"
+            checked={cor === 'darkslategrey'}
+            onChange={handleCorChange}
+          />
+          CinzaTop
+        </label>
+        <label>
+          <input
+            type="radio"
+            value="white"
+            checked={cor === 'white'}
+            onChange={handleCorChange}
+          />
+          Branco
+        </label>
+      </div>
     </div>
   );
 };
