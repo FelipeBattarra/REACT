@@ -1,5 +1,3 @@
-# Projeto de Tarefas Reacthttps://github.com/FelipeBattarra/REACT/tree/master
-
 Este é um projeto simples desenvolvido com **React** para gerenciamento de tarefas. O objetivo é criar, listar, excluir e armazenar as tarefas no **localStorage**.
 
 ## Funcionalidades:
